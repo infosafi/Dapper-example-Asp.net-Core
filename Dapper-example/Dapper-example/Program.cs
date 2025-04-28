@@ -1,7 +1,11 @@
+using Dapper_example.Repository;
+using Dapper_example.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IStoreProcedureAccess, StoreProcedureAccess>();
 
 var app = builder.Build();
 

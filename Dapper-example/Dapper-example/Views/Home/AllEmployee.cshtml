@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@if (ViewBag.Employees != null)
+{
+    <table id="myTable" class="table table-responsive table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Job Title</th>
+                <th>Hire Date</th>
+                <th>Salary</th>
+                <th>Action</th>
+                </tr>
+        </thead>
+        <tbody>
+            @foreach (var emplist in ViewBag.Employees)
+            {
+                <tr>
+                    <td>@emplist.employeeid</td>
+                    <td>@emplist.firstname</td>
+                    <td>@emplist.lastname</td>
+                    <td>@emplist.jobtitle</td>
+                    <td>@Convert.ToDateTime(emplist.hiredate).ToString("dd-MMM-yyyy")</td>
+                    <td>@Convert.ToDouble(emplist.salary).ToString("#,##0.00")</td>
+                    <td><a onclick="return confirm('Do you want to Remove')"
+                           asp-action="DeleteEmployee" asp-controller="Home" asp-route-id="@emplist.employeeid" class="btn btn-sm btn-danger">Remove</a>
+                    </td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+}
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}

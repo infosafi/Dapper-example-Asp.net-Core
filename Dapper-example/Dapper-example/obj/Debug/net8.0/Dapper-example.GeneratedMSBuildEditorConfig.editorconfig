@@ -18,6 +18,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = E:\Safi-Backup\ASP.Net Core\Dapper-example-Asp.net-Core\Dapper-example\Dapper-example
 build_property._RazorSourceGeneratorDebug = 
 
+[E:/Safi-Backup/ASP.Net Core/Dapper-example-Asp.net-Core/Dapper-example/Dapper-example/Views/Home/AllEmployee.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBbGxFbXBsb3llZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/Safi-Backup/ASP.Net Core/Dapper-example-Asp.net-Core/Dapper-example/Dapper-example/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
