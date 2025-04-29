@@ -44,6 +44,7 @@ namespace Dapper_example.Controllers
             var emplist = await Task.FromResult(_dbAcccess.DataListMax20<VMEmployee>(parms));
                 
             ViewBag.Employees = emplist;
+            _logger.LogInformation("Data Found! Employee List Loaded");
             return View();
         }
 
@@ -59,10 +60,66 @@ namespace Dapper_example.Controllers
             string message = "";
             if (result)
             {
+                _logger.LogInformation("Employee Removed {id}", id);
                 message = "Data Remove Successfully";
             }
             TempData["msg"] = message;
+
             return RedirectToAction("AllEmployee");
+        }
+
+        [HttpGet]
+        [Route("/add-employee")]
+        public IActionResult AddEmployee()
+        {
+
+            return  View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveEmployee(VMEmployee employee)
+        {
+            if (ModelState.IsValid)
+            {
+                if (employee == null)
+                {
+                    TempData["msg"] = "Update Failed No data found to save";
+                    TempData["msgtype"] = "alert alert-danger";
+                    return RedirectToAction("AddEmployee");
+                }
+                var parms = new SPParameters();
+                parms.StoredProcedure = "dbo.SP_EMPLOYEE_MGT";
+                parms.Calltype = "UPDATE_EMPLOYEE";
+                parms.Desc01 = employee.employeeid ?? "";
+                parms.Desc02 = employee.firstname??"";
+                parms.Desc03 = employee.lastname ?? "";
+                parms.Desc04 = employee.jobtitle ?? "";
+                parms.Desc05 = employee.salary.ToString();
+                parms.Desc06 = employee.hiredate.ToString();
+
+                bool result = await Task.FromResult(_dbAcccess.ExecuteMax20(parms));
+
+
+                if (result) {
+                    TempData["msg"] = "Update Successfully";
+                    TempData["msgtype"] = "alert alert-success";
+                    return RedirectToAction("AddEmployee");
+                    
+                }
+                else
+                {
+                    TempData["msg"] = "Update Failed";
+                    TempData["msgtype"] = "alert alert-danger";
+                    return RedirectToAction("AddEmployee");
+                }
+            }
+            else
+            {
+                TempData["msg"] = "Unknown Validation";
+                TempData["msgtype"] = "alert alert-danger";
+                return RedirectToAction("AddEmployee");
+            }
+
         }
     }
 }

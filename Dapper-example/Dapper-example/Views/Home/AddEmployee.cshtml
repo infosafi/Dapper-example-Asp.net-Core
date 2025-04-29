@@ -1,0 +1,75 @@
+﻿@model VMEmployee;
+
+
+
+
+
+<section class="contact-us">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="down-contact">
+                    <div class="row">
+                        <div class="col-lg-8">
+                           
+                              
+                                <div class="content">
+                                    @if (TempData["msg"] != null )
+                                    {
+                                        if (TempData["msg"].ToString().Length > 0)
+                                        {
+                                            <div class="@TempData["msgtype"]">@TempData["msg"]</div>
+
+                                        }
+                                    }
+                                    <form role="form" asp-action="SaveEmployee" enctype="multipart/form-data">
+                                        <fieldset>
+                                            <div asp-validation-summary="All" class="text-danger"></div>
+                                           
+                                            <br />
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="First Name" asp-for="firstname">
+                                            </div>
+                                        <br />
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Last Name" asp-for="lastname">
+                                            </div>
+                                        <br />
+                                            <div class="form-group">
+                                                <textarea class="form-control" placeholder="Job Title" asp-for="jobtitle"></textarea>
+                                            </div>
+                                        <br />
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Salary" asp-for="salary">
+                                                <span asp-validation-for="salary" class="text-danger"></span>
+                                            </div>
+                                        <br />
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Hire date" asp-for="hiredate">
+                                            </div>
+                                        <br />
+                                            <button type="submit" class="btn btn-lg btn-success btn-block">Save</button>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                           
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</section>
+
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -3,7 +3,7 @@
 *@
 @{
 }
-
+<a asp-action="AddEmployee" asp-controller="Home">Add New</a>
 
 @if (ViewBag.Employees != null)
 {
@@ -37,6 +37,8 @@
         </tbody>
     </table>
 }
+
+
 @section scripts {
     <script>
         $(document).ready(function () {
