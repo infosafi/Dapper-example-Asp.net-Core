@@ -101,6 +101,8 @@ namespace Dapper_example.Controllers
 
 
                 if (result) {
+                    _logger.LogInformation("Data Update Successfully");
+
                     TempData["msg"] = "Update Successfully";
                     TempData["msgtype"] = "alert alert-success";
                     return RedirectToAction("AddEmployee");
